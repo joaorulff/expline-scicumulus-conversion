@@ -1,3 +1,4 @@
+package br.ufrj.cos.expline.intantiation.scicumulus;
 
 public class AbstractWorkflowMain {
 	
