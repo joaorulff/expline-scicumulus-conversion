@@ -1,4 +1,4 @@
-package br.ufrj.cos.expline.intantiation.scicumulus;
+package br.ufrj.cos.expline.instantiation.scicumulus;
 import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
