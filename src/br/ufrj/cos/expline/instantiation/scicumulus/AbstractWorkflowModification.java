@@ -90,35 +90,42 @@ public class AbstractWorkflowModification {
 		}
 	}
 	
-	public Document copyActivitiesToAbstractWorkflow(Document originalXML){
+public Document copyActivitiesToAbstractWorkflow(Document originalXML){
 		
 		Element root = originalXML.getDocumentElement();
 		
 		ArrayList<Node> array = new ArrayList<>();
+		ArrayList<Node> removedList = new ArrayList<>();
 		
-		NodeList activitiesChildren = root.getElementsByTagName("Activities");
+		NodeList activities = root.getElementsByTagName("Activities");
 		
-		for(int i = 0; i < activitiesChildren.getLength();i++)
+		for(int i = 0; i < activities.getLength();i++)
 		{
-			Node aux = activitiesChildren.item(i);
+			Node aux = activities.item(i);
 			for(int j = 0;j < aux.getChildNodes().getLength();j++)
 			{
 				array.add(aux.getChildNodes().item(j));
 			}
-			root.removeChild(aux);
-			i--;
+			removedList.add(aux);
 		}
 		
-		
-		
-		Iterator<Node> it = array.iterator();
+		Iterator<Node> it = removedList.iterator(); 
 		while(it.hasNext())
 		{
 			Node aux = it.next();
-			Attr newAttribute = originalXML.createAttribute("Description");
-			newAttribute.setValue("");
+			root.removeChild(aux);
+		}
+		
+		it = array.iterator();
+		System.out.println(array.size());
+		
+		while(it.hasNext())
+		{
+			Node aux = it.next();
+			Attr novo = originalXML.createAttribute("Description");
+			novo.setValue("");
 			Element elem = (Element)aux;
-			elem.setAttributeNode(newAttribute);
+			elem.setAttributeNode(novo);
 			root.appendChild(elem);
 		}
 		
