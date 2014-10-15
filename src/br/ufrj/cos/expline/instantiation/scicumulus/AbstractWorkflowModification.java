@@ -95,38 +95,37 @@ public Document copyActivitiesToAbstractWorkflow(Document originalXML){
 		Element root = originalXML.getDocumentElement();
 		
 		ArrayList<Node> array = new ArrayList<>();
-		ArrayList<Node> removedList = new ArrayList<>();
 		
 		NodeList activities = root.getElementsByTagName("Activities");
 		
-		for(int i = 0; i < activities.getLength();i++)
+		int activitiesLength = activities.getLength();
+		
+		for(int i = 0; i < activitiesLength;i++)
 		{
 			Node aux = activities.item(i);
-			for(int j = 0;j < aux.getChildNodes().getLength();j++)
+			
+			NodeList nodesTemp = aux.getChildNodes();
+			int childNodesLength = nodesTemp.getLength();
+			
+			for(int j = 0;j < childNodesLength ;j++)
 			{
-				array.add(aux.getChildNodes().item(j));
+				array.add(nodesTemp.item(j));
 			}
-			removedList.add(aux);
-		}
-		
-		Iterator<Node> it = removedList.iterator(); 
-		while(it.hasNext())
-		{
-			Node aux = it.next();
 			root.removeChild(aux);
 		}
 		
-		it = array.iterator();
+		Iterator<Node> it = array.iterator();
 		System.out.println(array.size());
 		
 		while(it.hasNext())
 		{
 			Node aux = it.next();
+			Node edges = root.getElementsByTagName("Edges").item(0);
 			Attr novo = originalXML.createAttribute("Description");
 			novo.setValue("");
 			Element elem = (Element)aux;
 			elem.setAttributeNode(novo);
-			root.appendChild(elem);
+			root.insertBefore(elem, edges);
 		}
 		
 		return originalXML;
