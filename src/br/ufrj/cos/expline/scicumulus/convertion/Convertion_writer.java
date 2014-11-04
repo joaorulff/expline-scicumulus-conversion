@@ -1,5 +1,5 @@
 package br.ufrj.cos.expline.scicumulus.convertion;
 
-public class convertion {
+public class Convertion_writer {
 
 }
