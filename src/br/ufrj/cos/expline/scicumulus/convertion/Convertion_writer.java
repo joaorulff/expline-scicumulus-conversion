@@ -1,5 +1,6 @@
 package br.ufrj.cos.expline.scicumulus.convertion;
 
+import javax.xml.soap.Node;
 import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -13,7 +14,8 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class Convertion_writer {
+public class Convertion_writer implements IWriter{
+
 	
 	
 	Document scicumulusXML;
@@ -68,6 +70,28 @@ public class Convertion_writer {
 			System.out.println("Error while saving the XML file");
 		}
 	}
+
+
+	@Override
+	public void insertActivity(Node parent, Node node) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void insertRelation(Node parent, Node node) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void insertField(Node parent, Node node) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
+	

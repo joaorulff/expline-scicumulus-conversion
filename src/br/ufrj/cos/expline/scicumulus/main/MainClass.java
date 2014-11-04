@@ -7,7 +7,7 @@ public class MainClass {
 	public static void main(String[] args) {
 		Convertion_writer cw = new Convertion_writer();
 		cw.scicumulusMainNodeCreation();
-		cw.scicumulusConceptualWorkflowCreation();
+		//cw.scicumulusConceptualWorkflowCreation();
 		cw.saveDocumentToDisk();
 	}
 	
