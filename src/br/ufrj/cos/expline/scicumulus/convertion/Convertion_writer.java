@@ -9,13 +9,15 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class Convertion_writer {
 	
 	
-	Document scicumulusXML;	
+	Document scicumulusXML;
+	Element root;
 	
 	
 	public Convertion_writer(){
@@ -33,6 +35,23 @@ public class Convertion_writer {
 	public void scicumulusMainNodeCreation(){
 		Element root = this.scicumulusXML.createElement("SciCumulus");
 		this.scicumulusXML.appendChild(root);
+		this.root = root;
+	}
+	
+	public void scicumulusConceptualWorkflowCreation(){
+		
+		Element conceptualWorkflow = this.scicumulusXML.createElement("conceptualWorkflow");
+		
+		Attr tag = this.scicumulusXML.createAttribute("tag");
+		tag.setValue("workflow-1");
+		conceptualWorkflow.setAttributeNode(tag);
+		
+		Attr description = this.scicumulusXML.createAttribute("description");
+		description.setValue("");
+		conceptualWorkflow.setAttributeNode(description);
+		
+		
+		root.appendChild(conceptualWorkflow);
 	}
 	
 	
@@ -42,7 +61,7 @@ public class Convertion_writer {
 		TransformerFactory transformerfactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerfactory.newTransformer();
 		DOMSource documentSource = new DOMSource(this.scicumulusXML);
-		StreamResult result = new StreamResult(new File("newDocument.xml"));
+		StreamResult result = new StreamResult(new File("SciCumulus-wp.xml"));
 		transformer.transform(documentSource, result);
 		System.out.println("File Saved");
 		}catch(Exception e){
