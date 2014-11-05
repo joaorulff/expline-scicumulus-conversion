@@ -74,7 +74,9 @@ public class Convertion_writer implements IWriter{
 
 	@Override
 	public void insertActivity(Element parent, Element node) {
-		// TODO Auto-generated method stub
+		Element activity = this.scicumulusXML.createElement("activity");
+		Attr tag = this.scicumulusXML.createAttribute("tag");
+		tag.setValue("");
 		
 	}
 
