@@ -4,8 +4,8 @@ import org.w3c.dom.Element;
 
 public interface IWriter 
 {
-	public void insertActivity( Element parent, Element node );
-	public void insertRelation( Element parent, Element node );
-	public void insertField( Element parent, Element node );
+	public void insertActivity( String tag,String type );
+	public void insertRelation( String reltype, String name );
+	public void insertField( String name, String type, String input, String output );
 		
 }
