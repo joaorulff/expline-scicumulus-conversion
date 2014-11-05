@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 
 public class Convertion_reader {
 	private final IWriter writer;
@@ -43,6 +44,7 @@ public class Convertion_reader {
 	{
 		Element root = document.getDocumentElement();
 		NodeList childrenList = root.getChildNodes();
+		
 		for(int i = 0;i<childrenList.getLength();i++)
 		{
 			if(!childrenList.item(i).getNodeName().equals("#text"))
@@ -55,13 +57,20 @@ public class Convertion_reader {
 		 * Catching Activities 
 		 */
 		NodeList rootChildrenActivity = root.getElementsByTagName("Activity");
-		System.out.println(rootChildrenActivity.item(0).getChildNodes().getLength());
-		
+				
+		for(int i = 0 ; i < rootChildrenActivity.getLength();i++)
+		{
+			Element auxElem = (Element) rootChildrenActivity.item(i);
+			auxElem.getElementsByTagName("Ports");
+		}
 		/*
 		 * Catching Edges
 		 */
 		NodeList rootChildrenEdge = root.getElementsByTagName("Edge");
 		
+		for(int i = 0; i < rootChildrenEdge.getLength();i++){
+			Element auxElem = (Element)rootChildrenEdge.item(i);
+		}
 		
 	}
 	

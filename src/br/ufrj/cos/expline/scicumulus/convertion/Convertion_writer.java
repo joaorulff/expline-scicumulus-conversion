@@ -1,6 +1,5 @@
 package br.ufrj.cos.expline.scicumulus.convertion;
 
-import javax.xml.soap.Node;
 import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -10,6 +9,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.Node;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -73,21 +73,21 @@ public class Convertion_writer implements IWriter{
 
 
 	@Override
-	public void insertActivity(Node parent, Node node) {
+	public void insertActivity(Element parent, Element node) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void insertRelation(Node parent, Node node) {
+	public void insertRelation(Element parent, Element node) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void insertField(Node parent, Node node) {
+	public void insertField(Element parent, Element node) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,11 +1,11 @@
 package br.ufrj.cos.expline.scicumulus.convertion;
 
-import javax.xml.soap.Node;
+import org.w3c.dom.Element;
 
 public interface IWriter 
 {
-	public void insertActivity( Node parent, Node node );
-	public void insertRelation( Node parent, Node node );
-	public void insertField( Node parent, Node node );
+	public void insertActivity( Element parent, Element node );
+	public void insertRelation( Element parent, Element node );
+	public void insertField( Element parent, Element node );
 		
 }
