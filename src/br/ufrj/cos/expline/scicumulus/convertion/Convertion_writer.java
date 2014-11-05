@@ -1,6 +1,7 @@
 package br.ufrj.cos.expline.scicumulus.convertion;
 
 import java.io.File;
+import java.util.Scanner;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,6 +13,10 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+
 
 public class Convertion_writer implements IWriter{
 
@@ -71,17 +76,51 @@ public class Convertion_writer implements IWriter{
 	}
 
 
-	@Override
-<<<<<<< HEAD
-	public void insertActivity(Element parent, Element node) {
-		Element activity = this.scicumulusXML.createElement("activity");
-		Attr tag = this.scicumulusXML.createAttribute("tag");
-		tag.setValue("");
-=======
+
 	public void insertActivity(String tag, String type) {
-		// TODO Auto-generated method stub
->>>>>>> 5f506b73d93f20cf7e1e53c950b8331108ab2562
 		
+		Scanner entry = new Scanner(System.in);
+		
+		
+		Element activity = this.scicumulusXML.createElement("activity");
+		
+		Attr sciCumulusTag = this.scicumulusXML.createAttribute("tag");
+		sciCumulusTag.setValue(tag);
+		
+		Attr sciCumulusDescription = this.scicumulusXML.createAttribute("description");
+		sciCumulusDescription.setValue("");
+		
+		Attr sciCumulusType = this.scicumulusXML.createAttribute("type");
+		sciCumulusType.setValue(type);
+		
+		Attr sciCumulusActivation = this.scicumulusXML.createAttribute("activation");
+		System.out.println("Activation:");
+		sciCumulusActivation.setValue(entry.nextLine());
+		
+		
+		activity.setAttributeNode(sciCumulusTag);
+		activity.setAttributeNode(sciCumulusType);
+		activity.setAttributeNode(sciCumulusDescription);
+		activity.setAttributeNode(sciCumulusActivation);
+		
+		appendActivity(activity);
+		
+	}
+	
+	public void appendActivity(Element activity){
+		
+		NodeList sciCumulusChildren = this.root.getChildNodes();
+		Node currentChild = null;
+		
+		for (int i = 0; i < sciCumulusChildren.getLength(); i++) {
+			currentChild = sciCumulusChildren.item(i);
+			
+			if (currentChild.getNodeName().equals("conceptualWorkflow")) {
+				break;
+			}
+		}
+		
+		currentChild.appendChild(activity);
 	}
 
 

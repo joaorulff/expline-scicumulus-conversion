@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><SciCumulus><conceptualWorkflow description="" tag="workflow-1"/></SciCumulus>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><SciCumulus><conceptualWorkflow description="" tag="workflow-1"><activity activation="java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%" description="" tag="act1" type="MAP"/><activity activation="java -jar /root/programs/Sleep.jar ID=%=ID% T2=%=T2%" description="" tag="act2" type="MAP"/></conceptualWorkflow></SciCumulus>
