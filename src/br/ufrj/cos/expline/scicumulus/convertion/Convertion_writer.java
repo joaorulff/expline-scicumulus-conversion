@@ -107,7 +107,7 @@ public class Convertion_writer implements IWriter{
 		
 	}
 	
-	public void appendActivity(Element activity){
+	private void appendActivity(Element activity){
 		
 		NodeList sciCumulusChildren = this.root.getChildNodes();
 		Node currentChild = null;
