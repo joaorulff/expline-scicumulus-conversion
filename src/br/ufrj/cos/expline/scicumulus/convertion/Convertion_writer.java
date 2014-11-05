@@ -9,7 +9,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.dom.Node;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -73,25 +72,25 @@ public class Convertion_writer implements IWriter{
 
 
 	@Override
-	public void insertActivity(Element parent, Element node) {
+	public void insertActivity(String tag, String type) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void insertRelation(Element parent, Element node) {
+	public void insertRelation(String reltype, String name) {
 		// TODO Auto-generated method stub
 		
 	}
 
 
 	@Override
-	public void insertField(Element parent, Element node) {
+	public void insertField(String name, String type, String input,
+			String output) {
 		// TODO Auto-generated method stub
 		
 	}
-	
 
 }
 	
