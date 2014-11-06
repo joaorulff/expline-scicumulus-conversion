@@ -104,11 +104,11 @@ public class Convertion_writer implements IWriter{
 		activity.setAttributeNode(sciCumulusActivityDescription);
 		activity.setAttributeNode(sciCumulusActivityActivation);
 		
-		appendActivity(activity);
+		appendConceptualWorkflowChild(activity);
 		
 	}
 	
-	private void appendActivity(Element activity){
+	private void appendConceptualWorkflowChild(Element activity){
 		
 		NodeList sciCumulusChildren = this.root.getElementsByTagName("conceptualWorkflow");
 		Node currentChild = sciCumulusChildren.item(0);
@@ -124,21 +124,29 @@ public class Convertion_writer implements IWriter{
 		Attr sciCumulusRelationReltype = this.scicumulusXML.createAttribute("reltype");
 		sciCumulusRelationReltype.setNodeValue("Input");
 		
+		
 		Attr sciCumulusRelationName = this.scicumulusXML.createAttribute("name");
 		sciCumulusRelationName.setNodeValue(name);
+		
+		sciCumulusRelation.setAttributeNode(sciCumulusRelationReltype);
+		sciCumulusRelation.setAttributeNode(sciCumulusRelationName);
+		
 		
 		if (dependency != null) {
 			Attr sciCumulusRelationDependency = this.scicumulusXML.createAttribute("dependency");
 			sciCumulusRelationDependency.setNodeValue(dependency);
+			sciCumulusRelation.setAttributeNode(sciCumulusRelationDependency);
+			
 		}
 		
-		appendRelation(sciCumulusRelation, activityTag);
+		
+		
+		appendActivityChild(sciCumulusRelation, activityTag);
 		
 	}
 	
-	private void appendRelation (Element relation, String activityTag){
+	private void appendActivityChild (Element relation, String activityTag){
 		
-		System.out.println("Entered in AppendRelation");
 		
 		NodeList sciCumulusChildren = this.root.getElementsByTagName("conceptualWorkflow");
 		
@@ -162,15 +170,58 @@ public class Convertion_writer implements IWriter{
 		
 	}
 	
-	public void insertOutputRelation(String name) {
-		//TODO
+	public void insertOutputRelation(String name, String activityTag) {
+		
+		Element sciCumulusRelation = this.scicumulusXML.createElement("relation");
+		
+		Attr sciCumulusRelationReltype = this.scicumulusXML.createAttribute("reltype");
+		sciCumulusRelationReltype.setNodeValue("Input");
+		
+		
+		Attr sciCumulusRelationName = this.scicumulusXML.createAttribute("name");
+		sciCumulusRelationName.setNodeValue(name);
+		
+		sciCumulusRelation.setAttributeNode(sciCumulusRelationReltype);
+		sciCumulusRelation.setAttributeNode(sciCumulusRelationName);
+		
+		
+		appendActivityChild(sciCumulusRelation, activityTag);
+		
+		
 	}
 
 
 	@Override
-	public void insertField(String name, String type, String input,
-			String output) {
-		// TODO Auto-generated method stub
+	public void insertField(String name, String type, String input, String output, String activityTag) {
+		
+		Element sciCumulusField = this.scicumulusXML.createElement("field");
+		
+		Attr sciCumulusFieldName = this.scicumulusXML.createAttribute("name");
+		sciCumulusFieldName.setValue(name);
+		
+		Attr sciCumulusFieldType = this.scicumulusXML.createAttribute("type");
+		sciCumulusFieldType.setNodeValue(type);
+		
+		Attr sciCumulusFieldInput = this.scicumulusXML.createAttribute("input");
+		sciCumulusFieldInput.setNodeValue(input);
+		
+		if (output != null) {
+			Attr sciCumulusFieldOutput = this.scicumulusXML.createAttribute("output");
+			sciCumulusFieldOutput.setNodeValue(output);
+			sciCumulusField.setAttributeNode(sciCumulusFieldOutput);
+		}
+		
+		Attr sciCumulusFieldDecimalplaces = this.scicumulusXML.createAttribute("decimalplaces");
+		sciCumulusFieldDecimalplaces.setNodeValue("0");
+		
+		
+		sciCumulusField.setAttributeNode(sciCumulusFieldName);
+		sciCumulusField.setAttributeNode(sciCumulusFieldType);
+		sciCumulusField.setAttributeNode(sciCumulusFieldInput);
+		sciCumulusField.setAttributeNode(sciCumulusFieldDecimalplaces);
+		
+		appendActivityChild(sciCumulusField, activityTag);
+		
 		
 	}
 
