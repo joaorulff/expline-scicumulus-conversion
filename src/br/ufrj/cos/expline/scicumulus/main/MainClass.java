@@ -8,8 +8,13 @@ public class MainClass {
 		Convertion_writer cw = new Convertion_writer();
 		cw.scicumulusMainNodeCreation();
 		cw.scicumulusConceptualWorkflowCreation();
+		
 		cw.insertActivity("act1", "MAP");
 		cw.insertActivity("act2", "MAP");
+		
+		cw.insertInputRelation("1", null, "act1");
+		
+		
 		cw.saveDocumentToDisk();
 	}
 	

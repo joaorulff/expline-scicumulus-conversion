@@ -13,6 +13,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -84,24 +85,24 @@ public class Convertion_writer implements IWriter{
 		
 		Element activity = this.scicumulusXML.createElement("activity");
 		
-		Attr sciCumulusTag = this.scicumulusXML.createAttribute("tag");
-		sciCumulusTag.setValue(tag);
+		Attr sciCumulusActivityTag = this.scicumulusXML.createAttribute("tag");
+		sciCumulusActivityTag.setValue(tag);
 		
-		Attr sciCumulusDescription = this.scicumulusXML.createAttribute("description");
-		sciCumulusDescription.setValue("");
+		Attr sciCumulusActivityDescription = this.scicumulusXML.createAttribute("description");
+		sciCumulusActivityDescription.setValue("");
 		
-		Attr sciCumulusType = this.scicumulusXML.createAttribute("type");
-		sciCumulusType.setValue(type);
+		Attr sciCumulusActivityType = this.scicumulusXML.createAttribute("type");
+		sciCumulusActivityType.setValue(type);
 		
-		Attr sciCumulusActivation = this.scicumulusXML.createAttribute("activation");
+		Attr sciCumulusActivityActivation = this.scicumulusXML.createAttribute("activation");
 		System.out.println("Activation:");
-		sciCumulusActivation.setValue(entry.nextLine());
+		sciCumulusActivityActivation.setValue(entry.nextLine());
 		
 		
-		activity.setAttributeNode(sciCumulusTag);
-		activity.setAttributeNode(sciCumulusType);
-		activity.setAttributeNode(sciCumulusDescription);
-		activity.setAttributeNode(sciCumulusActivation);
+		activity.setAttributeNode(sciCumulusActivityTag);
+		activity.setAttributeNode(sciCumulusActivityType);
+		activity.setAttributeNode(sciCumulusActivityDescription);
+		activity.setAttributeNode(sciCumulusActivityActivation);
 		
 		appendActivity(activity);
 		
@@ -109,25 +110,60 @@ public class Convertion_writer implements IWriter{
 	
 	private void appendActivity(Element activity){
 		
-		NodeList sciCumulusChildren = this.root.getChildNodes();
-		Node currentChild = null;
-		
-		for (int i = 0; i < sciCumulusChildren.getLength(); i++) {
-			currentChild = sciCumulusChildren.item(i);
-			
-			if (currentChild.getNodeName().equals("conceptualWorkflow")) {
-				break;
-			}
-		}
+		NodeList sciCumulusChildren = this.root.getElementsByTagName("conceptualWorkflow");
+		Node currentChild = sciCumulusChildren.item(0);
 		
 		currentChild.appendChild(activity);
 	}
 
 
 	@Override
-	public void insertRelation(String reltype, String name) {
-		// TODO Auto-generated method stub
+	public void insertInputRelation(String name, String dependency, String activityTag) {
+		Element sciCumulusRelation = this.scicumulusXML.createElement("relation");
 		
+		Attr sciCumulusRelationReltype = this.scicumulusXML.createAttribute("reltype");
+		sciCumulusRelationReltype.setNodeValue("Input");
+		
+		Attr sciCumulusRelationName = this.scicumulusXML.createAttribute("name");
+		sciCumulusRelationName.setNodeValue(name);
+		
+		if (dependency != null) {
+			Attr sciCumulusRelationDependency = this.scicumulusXML.createAttribute("dependency");
+			sciCumulusRelationDependency.setNodeValue(dependency);
+		}
+		
+		appendRelation(sciCumulusRelation, activityTag);
+		
+	}
+	
+	private void appendRelation (Element relation, String activityTag){
+		
+		System.out.println("Entered in AppendRelation");
+		
+		NodeList sciCumulusChildren = this.root.getElementsByTagName("conceptualWorkflow");
+		
+		Element currentChild = (Element)sciCumulusChildren.item(0);
+		
+		NodeList conceptualWorkflowChildren = currentChild.getElementsByTagName("activity");
+		
+		for (int i = 0; i < conceptualWorkflowChildren.getLength(); i++) {
+			
+			Element currentActivity = (Element)conceptualWorkflowChildren.item(i);
+			String currentActivityTag = currentActivity.getAttribute("tag");
+			
+			if (currentActivityTag.equals(activityTag)) {
+				currentActivity.appendChild(relation);
+			}
+
+		}
+		
+		
+		
+		
+	}
+	
+	public void insertOutputRelation(String name) {
+		//TODO
 	}
 
 
