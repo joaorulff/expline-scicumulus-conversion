@@ -9,6 +9,6 @@ public class Main
 	public static void main(String [] args)
 	{
 		IWriter writer = new Convertion_writer();
-		new Convertion_reader(writer);
+		//new Convertion_reader(writer);
 	}
 }

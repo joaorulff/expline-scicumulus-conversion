@@ -68,7 +68,7 @@ public class Convertion_writer implements IWriter{
 		TransformerFactory transformerfactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerfactory.newTransformer();
 		DOMSource documentSource = new DOMSource(this.scicumulusXML);
-		StreamResult result = new StreamResult(new File("SciCumulus-wp.xml"));
+		StreamResult result = new StreamResult(new File("SciCumulus-wp_teste.xml"));
 		transformer.transform(documentSource, result);
 		System.out.println("File Saved");
 		}catch(Exception e){
@@ -105,6 +105,8 @@ public class Convertion_writer implements IWriter{
 		activity.setAttributeNode(sciCumulusActivityActivation);
 		
 		appendConceptualWorkflowChild(activity);
+		
+		entry.close();
 		
 	}
 	
@@ -224,6 +226,94 @@ public class Convertion_writer implements IWriter{
 		
 		
 	}
+	
+	public void insertEnvironment(){
+
+		Element sciCumulusenvironment = this.scicumulusXML.createElement("environment");
+		
+		Attr sciCumulusEnvironmentverbose = this.scicumulusXML.createAttribute("verbose");
+		sciCumulusEnvironmentverbose.setNodeValue("false");
+		
+		Attr sciCumulusEnvironmenttype = this.scicumulusXML.createAttribute("type");
+		sciCumulusEnvironmenttype.setNodeValue("CLOUD");
+		
+		Attr sciCumulusEnvironmentClusterName = this.scicumulusXML.createAttribute("cluster_name");
+		sciCumulusEnvironmentClusterName.setNodeValue("vitor");
+		
+		sciCumulusenvironment.setAttributeNode(sciCumulusEnvironmentverbose);
+		sciCumulusenvironment.setAttributeNode(sciCumulusEnvironmenttype);
+		sciCumulusenvironment.setAttributeNode(sciCumulusEnvironmentClusterName);
+		
+		this.appendConceptualWorkflowChild(sciCumulusenvironment);
+		
+		
+	}
+	
+	public void insertQuery(){
+		
+		
+		Scanner entry = new Scanner(System.in);
+		
+		
+		Element sciCumulusQuery = this.scicumulusXML.createElement("query");
+		
+		Attr sciCumulusQuerySQL = this.scicumulusXML.createAttribute("sql");
+		System.out.print("sql: ");
+		sciCumulusQuerySQL.setNodeValue(entry.nextLine());
+		
+		entry.close();
+		
+		this.appendConceptualWorkflowChild(sciCumulusQuery);
+		
+	}
+	
+	public void insertDatabase(){
+		
+		Scanner entry = new Scanner(System.in);
+		
+		Element sciCumulusDatabase = this.scicumulusXML.createElement("database");
+		
+		Attr sciCumulusDatabaseName = this.scicumulusXML.createAttribute("name");
+		System.out.println("Database name: ");
+		sciCumulusDatabaseName.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusDatabaseUsername = this.scicumulusXML.createAttribute("Username");
+		System.out.println("Username: ");
+		sciCumulusDatabaseUsername.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusDatabasePassword = this.scicumulusXML.createAttribute("password");
+		System.out.println("Database password");
+		sciCumulusDatabasePassword.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusDatabasePort = this.scicumulusXML.createAttribute("port");
+		System.out.println("Database port:");
+		sciCumulusDatabasePort.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusDatabaseServer = this.scicumulusXML.createAttribute("server");
+		System.out.println("Database Server: ");
+		sciCumulusDatabase.setNodeValue(entry.nextLine());
+		
+		Attr sciCumulusDatabasePath = this.scicumulusXML.createAttribute("path");
+		System.out.println("Database path:");
+		sciCumulusDatabase.setNodeValue(entry.nextLine());
+		
+		entry.close();
+		
+		this.appendConceptualWorkflowChild(sciCumulusDatabase);
+		
+		
+		
+		
+	}
+	
+	public void insertWorkspace(){
+		
+		//TODO: João Lucas
+		
+		Scanner entry = new Scanner(System.in);
+	}
 
 }
+
+
 	
