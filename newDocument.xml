@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><AbstractWorkflow><Activities><atvA ID="1" Name="atvA"/><atvB ID="2" Name="atvB"/></Activities><Edges><Edge ID="3" Source="1" Target="2"/></Edges></AbstractWorkflow>
