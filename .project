@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
 	<name>expline-scicumulus-instantiation</name>
+=======
+	<name>expline-scicumulus-convertion</name>
+>>>>>>> f983d13d71a7a8ee48bbd87fcc2a1b97e431ecfd
 	<comment></comment>
 	<projects>
 	</projects>
